@@ -1,0 +1,16 @@
+Tremor fix by Notaz
+
+diff --git a/music_ogg.c b/music_ogg.c
+index 5dcc3e2..7e9b8dc 100644
+--- SDL_mixer-1.2.13.orig/music_ogg.c
++++ SDL_mixer-1.2.13/music_ogg.c
+@@ -225,7 +225,7 @@
+ void OGG_jump_to_time(OGG_music *music, double time)
+ {
+ #ifdef OGG_USE_TREMOR
+-       vorbis.ov_time_seek( &music->vf, (ogg_int64_t)time );
++       vorbis.ov_time_seek( &music->vf, (ogg_int64_t)(time * 1000.0) );
+ #else
+        vorbis.ov_time_seek( &music->vf, time );
+ #endif
+
