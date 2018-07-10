@@ -19,25 +19,18 @@ Gameblabla, 2018
 diff -Nur SDL_mixer-1.2.13.orig/mixer.c SDL_mixer-1.2.13/mixer.c
 --- SDL_mixer-1.2.13.orig/mixer.c
 +++ SDL_mixer-1.2.13/mixer.c
-@@ -420,6 +420,17 @@
+@@ -420,6 +420,10 @@
  		}
  	}
  
 +	if (format == AUDIO_S16 || format == AUDIO_S16MSB || format == AUDIO_S16SYS)
 +		format = AUDIO_S16LSB;
 +	Mix_Init(MIX_INIT_OGG|MIX_INIT_MOD);
-+	if (frequency == 32000 || frequency == 24000 || frequency == 16000)
-+	{
-+		frequency = 22050;
-+		chunksize = 1024;
-+		format = AUDIO_S16LSB;
-+		nchannels = MIX_DEFAULT_CHANNELS;
-+	}
 +	
  	/* Set the desired format and frequency */
  	desired.freq = frequency;
  	desired.format = format;
-@@ -476,6 +487,9 @@
+@@ -476,6 +480,9 @@
  
  	audio_opened = 1;
  	SDL_PauseAudio(0);
